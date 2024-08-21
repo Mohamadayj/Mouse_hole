@@ -1,19 +1,19 @@
-from tkinter import *
-from tkinter.ttk import *
+import tkinter as tk
+from tkinter import ttk
 import random
 import time
 import threading
 
 options = ["self", "left", "right", "front", "host"]
 
-window = Tk()
+window = tk.Tk()
 window.title("Mouse in Hole")
 # window.attributes('-fullscreen', True)
 window.state('zoomed')
 
-x = IntVar()
+x = tk.IntVar()
 score = 0
-percent = StringVar()
+percent = tk.StringVar()
 list_radio = []
 response = []
 
@@ -30,13 +30,13 @@ def new_game():
     index_of_random = options.index(turn_choice)
     print(f"index of random: {index_of_random}")
 
-    label_turn = Label(window, text=turn_choice, font=("Arial", 20), fg="yellow", bg="black",
-                       padx=20, pady=20, relief=RAISED, width=15, height=2)
+    label_turn = tk.Label(window, text=turn_choice, font=("Arial", 20), fg="yellow", bg="black",
+                       padx=20, pady=20, relief=tk.RAISED, width=15, height=2)
     label_turn.grid(row=0, column=0)
     label_turn.update()
 
     for index in range(len(options)):
-        radiobutton = Radiobutton(window, text=options[index], variable=x, value=index, command=choice,
+        radiobutton = Tk.Radiobutton(window, text=options[index], variable=x, value=index, command=choice,
                                   padx=10, font=("Impact", 15), indicatoron=True, width=15)
         radiobutton.grid()
         radiobutton.update()
@@ -60,22 +60,22 @@ def new_game():
     return score
 
 
-new_window_button = Button(window, text="New Game", font=("Comic Sans", 15), fg="red", bg="black",
+new_window_button = tk.Button(window, text="New Game", font=("Comic Sans", 15), fg="red", bg="black",
                      activebackground="black", activeforeground="red", command=new_game,
                            height=2, width=14)
 new_window_button.grid(row=1, column=0, sticky="NSEW")
 # new_window_button.grid_rowconfigure()
 
-label_score = Label(window, text=f"Score: {score}", fg="red", bg="black", font=("Comic Sans", 15),
+label_score = tk.Label(window, text=f"Score: {score}", fg="red", bg="black", font=("Comic Sans", 15),
                     height=2, width=14)
 label_score.grid(row=2, column=0)
 label_score.update()
 
-bar = Progressbar(window, orient=HORIZONTAL, length=140)
+bar = ttk.Progressbar(window, orient=tk.HORIZONTAL, length=140)
 bar["value"] += score * 10
 bar.grid(row=3, column=0)
 
-bar_label = Label(window, textvariable=percent)
+bar_label = tk.Label(window, textvariable=percent)
 percent.set("Progress: " + str(int(bar["value"])) + "%")
 bar_label.grid(row=4, column=0)
 
