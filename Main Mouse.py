@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import random
 import threading
+from PIL import ImageTk, Image
+from tkinter import messagebox
 
 options = ["self", "left", "right", "front", "host"]
 
@@ -14,6 +16,8 @@ x = tk.IntVar()
 percent = tk.StringVar()
 list_radio = []
 response = []
+image_hosen = Image.open("hosen 1.ico")
+image_hosen = ImageTk.PhotoImage(image_hosen)
 
 
 def choice():
@@ -82,12 +86,24 @@ bar_label.grid(row=4, column=0)
 
 
 def check_command():
-    check_window = tk.Tk()
+    check_window = tk.Toplevel()
+    check_window.state('zoomed')
+
+    frame_check = tk.Frame(check_window, bg="yellow", bd=2, relief="sunken", width=100)
+    frame_check.grid(row=0, column=0)
+
+    canvas_check = tk.Canvas(check_window)
+    canvas_check.create_image(100, 100, image=image_hosen)
+    canvas_check.grid(row=10)
 
     def back_command():
-        pass
+        user_response = messagebox.askyesno(title="Confirmation",
+                                      message="Are you sure you want to go back?")
 
-    back_button = tk.Button(check_window, text="Back Button", bg="black", fg="red", font=("Comic Sans", 15),
+        if user_response:
+            check_window.destroy()
+
+    back_button = tk.Button(frame_check, text="Back Button", bg="black", fg="red", font=("Comic Sans", 15),
                             activebackground="black", activeforeground="red", command=back_command)
     back_button.grid(row=1, column=0)
 
