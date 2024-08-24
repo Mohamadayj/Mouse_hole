@@ -12,7 +12,7 @@ window.title("Mouse in Hole")
 # window.attributes('-fullscreen', True)
 window.state('zoomed')
 width, height = window.winfo_screenwidth(), window.winfo_screenheight()
-# print(width, height)
+print(width, height)
 
 options = ["self", "left", "right", "front", "host"]
 list_radio = []
@@ -23,12 +23,13 @@ played = 0
 
 image_hosen = Image.open("hosen 1.ico")
 image_hosen = ImageTk.PhotoImage(image_hosen)
-WIDTH = 1500
-HEIGHT = 1500
+WIDTH = 1360
+HEIGHT = 768
 xVel = 2
 yVel = 2
 image_width = image_hosen.width()
 image_height = image_hosen.height()
+print(image_width, image_height)
 
 
 def choice():
@@ -135,8 +136,8 @@ def check_command():
 
     elif score >= 1:
 
-        imagee = canvas_check.create_image(100, 100, image=image_hosen)
-        #
+        imagee = canvas_check.create_image(100, 100, image=image_hosen, anchor=NW)
+
         # def animation():
         #
         #     global xVel, yVel
@@ -154,10 +155,10 @@ def check_command():
         #
         # animation()
 
-        class Ball:
-            def __init__(self, canvas, x, y, xVel, yVel):
+        class Animation:
+            def __init__(self, canvas, image, x, y, xVel, yVel):
                 self.canvas = tk.Canvas
-                self.image = tk.Canvas.create_image(x, y, image=image_hosen)
+                self.image = tk.Canvas.create_image(x, y, image=image)
                 self.xVel = xVel
                 self.yVel = yVel
 
@@ -169,8 +170,8 @@ def check_command():
                     self.yVel = -self.yVel
                 self.canvas.move(self.image, self.xVel, self.yVel)
 
-        imagee = Ball(imagee, 0, 0, xVel, yVel)
-        imagee.move()
+        animation = Animation(imagee, image_hosen, 0, 0, xVel, yVel)
+        animation.move()
         check_window.update()
 
 
