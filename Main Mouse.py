@@ -138,22 +138,22 @@ def check_command():
 
         imagee = canvas_check.create_image(100, 100, image=image_hosen, anchor=NW)
 
-        # def animation():
-        #
-        #     global xVel, yVel
-        #
-        #     coordinates = tk.Canvas.coords(imagee)
-        #
-        #     if (coordinates[0] > (WIDTH - image_width)) or coordinates[0] < 0:
-        #         xVel = -xVel
-        #     if (coordinates[1] > (HEIGHT - image_height)) or coordinates[1] < 0:
-        #         yVel = -yVel
-        #
-        #     canvas_check.move(imagee, xVel, yVel)
-        #     check_window.update()
-        #     check_window.after(1, animation)
-        #
-        # animation()
+        def animation():
+        
+            global xVel, yVel
+
+            coordinates = canvas_check.coords(imagee)
+        
+            if (coordinates[0] > (WIDTH - image_width)) or coordinates[0] < 0:
+                xVel = -xVel
+            if (coordinates[1] > (HEIGHT - image_height)) or coordinates[1] < 0:
+                yVel = -yVel
+        
+            canvas_check.move(imagee, xVel, yVel)
+            check_window.update()
+            check_window.after(1, animation)
+        
+        animation()
 
         class Animation:
             def __init__(self, canvas, image, x, y, xVel, yVel):
