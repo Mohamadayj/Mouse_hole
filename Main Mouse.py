@@ -18,7 +18,7 @@ main_frame.pack(expand=True, anchor=CENTER)
 options = ["self", "left", "right", "front", "host"]
 
 image_files = ["hosen png.png", "nima png.png", "moein png.png", "ahmad png.png",
-               "hosen 2 png.png", "iman 2 png.png", "mmd 2 png.png", "sadegh2 png.png"]
+               "hosen 2 png.png", "iman 2 png.png", "mmd 2 png.png", "sadegh2 png.png", "chelle png.png"]
 
 images = {}
 x = tk.IntVar()
@@ -56,6 +56,7 @@ image_ahmad = images["ahmad png.png"]
 image_iman2 = images["iman 2 png.png"]
 image_mmd2 = images["mmd 2 png.png"]
 image_sadegh2 = images["sadegh2 png.png"]
+image_chelle = images["chelle png.png"]
 
 
 def ask_quit():
@@ -73,12 +74,12 @@ def help_command():
     help_frame = tk.Frame(help_window, width=600, height=800)
     help_frame.pack(expand=True, anchor=CENTER)
 
-    help_label1 = tk.Label(help_frame, text="Each 5 Percent provides you with a new prize",
+    help_label1 = tk.Label(help_frame, text="Each 5% provides you with a new prize",
                            font=("Arial", 30), width=item_width, height=item_height,
                            bg=item_bg, fg=item_fg)
     help_label1.pack(padx=item_padx, pady=item_pady)
 
-    help_label2 = tk.Label(help_frame, text="Score 50 awards the ultimate prize",
+    help_label2 = tk.Label(help_frame, text="50% progress awards the ultimate prize",
                            font=("Arial", 30), width=item_width, height=item_height,
                            bg=item_bg, fg=item_fg)
     help_label2.pack(padx=item_padx, pady=item_pady)
@@ -149,7 +150,6 @@ def new_game():
                               width=item_width, height=item_height)
         label_turn.grid(row=0, column=0, padx=item_padx, pady=item_pady)
         label_turn.update()
-        # PAD X,Y = 20
 
         for index in range(len(options)):
 
@@ -162,6 +162,10 @@ def new_game():
 
     def destruction():
         game.destroy()
+
+        for i in range(5, 50, 5):
+            if bar["value"] == i:
+                messagebox.showinfo("New Prize", "You just unlocked a new prize")
 
     timer = threading.Timer(2, destruction)
     timer.start()
@@ -241,8 +245,8 @@ def check_command():
 
     def open_prize():
 
-        if score < 49:
-            messagebox.showerror("ERROR", "Please Score 50 for the prize")
+        if score < 20:
+            messagebox.showerror("ERROR", "Your progress needs to reach 50% for the prize")
             return None
 
         else:
@@ -277,7 +281,8 @@ def check_command():
             (25, 30, image_ahmad, 400, 0),
             (30, 35, image_hosen2, 800, 0),
             (35, 40, image_mmd2, 0, 0),
-            (40, 45, image_iman2, 400, 0)
+            (40, 45, image_iman2, 400, 0),
+            (45, 50, image_chelle, 800, 0)
         ]
 
         for start, end, pic_tup, x, y in tuple_images:
